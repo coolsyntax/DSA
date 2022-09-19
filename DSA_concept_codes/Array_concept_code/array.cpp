@@ -1,7 +1,11 @@
 #include <iostream>
 #include <cmath>
 #include <array>
+<<<<<<< HEAD
 //I made this comment for git changes
+=======
+
+>>>>>>> temp-branch
 using namespace std;
 
 class Array
