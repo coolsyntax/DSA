@@ -36,65 +36,65 @@ nums is an ascending array that is possibly rotated.
 using namespace std;
  
 // Standard Binary Search function
-int binarySearch(int arr[], int low, int high, int key)
+int binarySearch(int A[], int l, int h, int key)
 {
-    if (high < low)
+    if (h < l)
         return -1;
  
-    int mid = (low + high) / 2;
-    if (key == arr[mid])
+    int mid = (l + h) / 2;
+    if (key == A[mid])
         return mid;
  
-    if (key > arr[mid])
-        return binarySearch(arr, (mid + 1), high, key);
+    if (key > A[mid])
+        return binarySearch(A, (mid + 1), h, key);
  
-    return binarySearch(arr, low, (mid - 1), key);
+    return binarySearch(A, l, (mid - 1), key);
 }
  
 // Function to get pivot. For array 3, 4, 5, 6, 1, 2
 // it returns 3 (index of 6)
-int findPivot(int arr[], int low, int high)
+int findPivot(int A[], int l, int h)
 {
     // Base cases
-    if (high < low)
+    if (h < l)
         return -1;
-    if (high == low)
-        return low;
+    if (h == l)
+        return l;
  
-    // low + (high - low)/2;
-    int mid = (low + high) / 2;
-    if (mid < high && arr[mid] > arr[mid + 1])
+    // l + (h - l)/2;
+    int mid = (l + h) / 2;
+    if (mid < h && A[mid] > A[mid + 1])
         return mid;
  
-    if (mid > low && arr[mid] < arr[mid - 1])
+    if (mid > l && A[mid] < A[mid - 1])
         return (mid - 1);
  
-    if (arr[low] >= arr[mid])
-        return findPivot(arr, low, mid - 1);
+    if (A[l] >= A[mid])
+        return findPivot(A, l, mid - 1);
  
-    return findPivot(arr, mid + 1, high);
+    return findPivot(A, mid + 1, h);
 }
  
 // Searches an element key in a pivoted
-// sorted array arr[] of size n
-int pivotedBinarySearch(int arr[], int n, int key)
+// sorted array A[] of size n
+int pivotedBinarySearch(int A[], int n, int key)
 {
-    int pivot = findPivot(arr, 0, n - 1);
+    int pivot = findPivot(A, 0, n - 1);
  
     // If we didn't find a pivot,
     // then array is not rotated at all
     if (pivot == -1)
-        return binarySearch(arr, 0, n - 1, key);
+        return binarySearch(A, 0, n - 1, key);
  
     // If we found a pivot, then first compare with pivot
     // and then search in two subarrays around pivot
-    if (arr[pivot] == key)
+    if (A[pivot] == key)
         return pivot;
  
-    if (arr[0] <= key)
-        return binarySearch(arr, 0, pivot - 1, key);
+    if (A[0] <= key)
+        return binarySearch(A, 0, pivot - 1, key);
  
-    return binarySearch(arr, pivot + 1, n - 1, key);
+    return binarySearch(A, pivot + 1, n - 1, key);
 }
  
 // Driver program to check above functions
@@ -111,3 +111,32 @@ int main()
  
     return 0;
 }
+
+/*
+int binary_search(vector<int> nums, int low, int high, int target){
+    if(low > high){
+        return -1;
+    }
+    
+    int mid = (high + low) / 2;
+
+    if(target == nums[mid]){
+        return mid;
+    }
+
+    if(nums[low] <= nums[mid]){
+
+        if(target >= nums[low] && target <= nums[mid]){
+            return binary_search(nums, low, mid-1, target);   
+        }
+
+        return binary_search(nums, mid+1, high, target);
+    }
+
+    if(target >= nums[mid] && target <= nums[high]){
+        return binary_search(nums, mid+1, high, target);
+    }
+
+    return binary_search(nums, low, mid-1, target);
+}
+*/
