@@ -39,7 +39,7 @@ try coding another solution using the divide and conquer approach, which is more
 
 int main()
 {
-    int current_sum = 0, max_till_now = 0;
+    int current_sum = 0, max_till_now = INT_MIN;
     int arr[] = {-2,1,-3,4,-1,2,1,-5,4};
     int size_of_array = sizeof(arr)/sizeof(arr[0]);
     // kadane algorithm
